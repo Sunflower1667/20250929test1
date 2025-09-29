@@ -1,1 +1,2 @@
+#이 파일이 상당히 중요함. pip install 패키지 적어두는 파일
 streamlit
