@@ -1,6 +1,16 @@
+
 import streamlit as st
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
+import os
+
+# 한글 폰트 설정 (모든 matplotlib 차트에 적용)
+font_path = os.path.abspath("fonts/NanumGothic-Regular.ttf")
+fontprop = fm.FontProperties(fname=font_path)
+plt.rcParams['font.family'] = fontprop.get_name()
+plt.rcParams['axes.unicode_minus'] = False
 
 st.title("Streamlit 요소 예시")
 
@@ -51,13 +61,12 @@ st.area_chart(df)
 
 # matplotlib 예시
 st.header("matplotlib 차트")
-import matplotlib.pyplot as plt
 fig, ax = plt.subplots()
 ax.plot(df.index, df["A"], label="A 컬럼")
-ax.set_title("matplotlib 라인 플롯 예시")
-ax.set_xlabel("Index")
-ax.set_ylabel("A 값")
-ax.legend()
+ax.set_title("matplotlib 라인 플롯 예시", fontproperties=fontprop)
+ax.set_xlabel("Index", fontproperties=fontprop)
+ax.set_ylabel("A 값", fontproperties=fontprop)
+ax.legend(prop=fontprop)
 st.pyplot(fig)
 
 # 이미지

@@ -2,7 +2,16 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+
 import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
+import os
+
+# 한글 폰트 설정 (모든 matplotlib 차트에 적용)
+font_path = os.path.abspath("fonts/NanumGothic-Regular.ttf")
+fontprop = fm.FontProperties(fname=font_path)
+plt.rcParams['font.family'] = fontprop.get_name()
+plt.rcParams['axes.unicode_minus'] = False
 
 st.title("성적 데이터 분석 및 시각화")
 
@@ -32,12 +41,13 @@ st.table(df[["이름", "총점", "평균"]])
 
 # 과목별 점수 분포 시각화 (matplotlib)
 st.subheader("과목별 점수 분포 (히스토그램)")
+
 fig, ax = plt.subplots()
 ax.hist([df["국어"], df["영어"], df["수학"]], bins=8, label=["국어", "영어", "수학"], alpha=0.7)
-ax.set_xlabel("점수")
-ax.set_ylabel("학생 수")
-ax.set_title("과목별 점수 분포")
-ax.legend()
+ax.set_xlabel("점수", fontproperties=fontprop)
+ax.set_ylabel("학생 수", fontproperties=fontprop)
+ax.set_title("과목별 점수 분포", fontproperties=fontprop)
+ax.legend(prop=fontprop)
 st.pyplot(fig)
 
 # 학생별 평균 점수 막대그래프 (Streamlit 내장)
